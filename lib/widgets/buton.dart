@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'lib/constants/assets_constants.dart';
+import '../constants/assets_constants.dart';
 import '../providers/size_config.dart';
 import '../theme/colors.dart';
 
@@ -83,9 +83,11 @@ class BuildButtonWithIcon extends StatelessWidget {
               : Container(
                   height: 18,
                   width: 18,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(googleLogo), fit: BoxFit.contain),
+                      image: AssetImage(AssetConstants.googleLogo),
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
           const SizedBox(width: 12),

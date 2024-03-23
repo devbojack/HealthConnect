@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthconnect/widgets/background.dart';
+import '../../constants/assets_constants.dart';
 import '../../providers/size_config.dart';
 import '../../widgets/buton.dart';
 import '../../widgets/text.dart';
@@ -22,54 +23,69 @@ class _IntroductionPageState extends State<IntroductionPage> {
     bool isTablet = SizeConfig.blockSizeW! > 600;
     return MyBackground(
       child: SafeArea(
-          child: Scaffold(
-              resizeToAvoidBottomInset: true,
-              appBar: AppBar(
-                  automaticallyImplyLeading: false,
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  actions: isIntroPage
-                      ? [] : [
-                          GestureDetector(
-                            onTap: removeIntroPage,
-                            child: normalIcon(Icons.close, context),
-                          ),
-                          const SizedBox(width: 12)
-                        ]
-                      ),
-              body: SizedBox(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: Column(
+        child: Scaffold(
+            resizeToAvoidBottomInset: true,
+            appBar: AppBar(
+                automaticallyImplyLeading: false,
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                actions: isIntroPage
+                    ? []
+                    : [
+                        GestureDetector(
+                          onTap: removeIntroPage,
+                          child: normalIcon(Icons.close, context),
+                        ),
+                        const SizedBox(width: 12)
+                      ]),
+            body: SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    alignment: Alignment.center,
+                    height: mHeight * 15,
+                    width: 40,
+                    child: const Image(
+                        image: AssetImage(introductionImage),
+                        fit: BoxFit.contain),
+                  ),
+                  SizedBox(
+                    child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Container(
-                            height: mHeight * 20,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('')
-                                )
-                              )
-                          ),
                           veryBigTextBold('Welcome To', mHeight, context),
+                          const SizedBox(height: 12),
                           Container(
-                              height: mHeight * 20,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('')
-                                )
-                              )
+                            height: mHeight * 12,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(lightLogoImage),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
                           ),
-                          BuildButton(
-                              onPressed: showGetStarted,
-                              buttonColor: Theme.of(context).primaryColor,
-                              buttonTitle: 'Get Started')
-                        ],
-                      ),
-                    )
-    ),),);
+                          const SizedBox(height: 24),
+                          bigCenteredText(
+                              "Bridging Wellness Together!", context)
+                        ]),
+                  ),
+                  BuildButton(
+                      onPressed: showGetStarted,
+                      buttonColor: Theme.of(context).primaryColor,
+                      buttonTitle: 'Get Started')
+                ],
+              ),
+            )),
+      ),
+    );
   }
 
   showGetStarted() {
@@ -87,8 +103,15 @@ class _IntroductionPageState extends State<IntroductionPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    Container(
+                      height: 28,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(AssetConstants.lightIconPath),
+                              fit: BoxFit.contain)),
+                    ),
                     const SizedBox(height: 24),
-                    NonBlueButton(
+                    BuildButtonWithIcon(
                         onPressed: () {
                           Navigator.of(context).pop();
                           setState(() {
@@ -96,11 +119,9 @@ class _IntroductionPageState extends State<IntroductionPage> {
                           });
                           removeIntroPage();
                         },
-                        buttonColor: whiteColor,
-                        buttonTitle: 'Create Account',
-                        titleColor: Colors.black),
+                        isEmail: true),
                     const SizedBox(height: 24),
-                    BuildButton(
+                    BuildButtonWithIcon(
                         onPressed: () {
                           Navigator.of(context).pop();
                           setState(() {
@@ -108,8 +129,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                           });
                           removeIntroPage();
                         },
-                        buttonColor: appBlue,
-                        buttonTitle: 'Sign In'),
+                        isEmail: false),
                     const SizedBox(height: 32),
                   ],
                 ),

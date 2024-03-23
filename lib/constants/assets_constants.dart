@@ -1,4 +1,14 @@
 // asset_constants.dart
+
+const String introductionImage = 'lib/assets/light_dark/introduction_image.png';
+
+const String signingImage = 'lib/assets/light_dark/signing_image.png';
+const String googleLogo = 'libs/assets/light_dark/google_logo.png';
+
+// Light theme specific assets
+const String lightLogoImage = 'lib/assets/light/auth_logo.png';
+const String lightAuthImage = 'lib/assets/light/app_icon.png';
+
 class AssetConstants {
   // Common assets used across both light and dark themes
   // Auth
@@ -8,7 +18,7 @@ class AssetConstants {
   static const String googleLogo = 'libs/assets/light_dark/google_logo.png';
 
   // Light theme specific assets
-  static const String lightLogoImage = 'lib/assets/light/logo.png';
+  static const String lightLogoImage = 'lib/assets/light/auth_logo.png';
   static const String lightAuthImage = 'lib/assets/light/app_icon.png';
   static const String lightIconPath = 'lib/assets/light/app_icon.png';
   static const String lightThemeIcon = 'assets/icons/light_icon.png';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthconnect/widgets/background.dart';
-
 import '../../providers/size_config.dart';
+import '../../widgets/buton.dart';
 import '../../widgets/text.dart';
 
 class IntroductionPage extends StatefulWidget {
@@ -37,8 +37,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                           const SizedBox(width: 12)
                         ]
                       ),
-              body: isIntroPage
-                  ? SizedBox(
+              body: SizedBox(
                       height: double.infinity,
                       width: double.infinity,
                       child: Column(
@@ -46,7 +45,14 @@ class _IntroductionPageState extends State<IntroductionPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          ProLogo(mHeight: mHeight),
+                          Container(
+                            height: mHeight * 20,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('')
+                                )
+                              )
+                          ),
                           veryBigTextBold('Welcome To', mHeight, context),
                           Container(
                               height: mHeight * 20,
@@ -58,13 +64,12 @@ class _IntroductionPageState extends State<IntroductionPage> {
                           ),
                           BuildButton(
                               onPressed: showGetStarted,
-                              buttonColor: newAppBlue,
+                              buttonColor: Theme.of(context).primaryColor,
                               buttonTitle: 'Get Started')
                         ],
                       ),
                     )
-                  : SigningPage(isSigningIn: isSigning))),
-    );
+    ),),);
   }
 
   showGetStarted() {

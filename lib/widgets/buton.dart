@@ -79,7 +79,7 @@ class BuildButtonWithIcon extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           isEmail
-              ? Icon(Icons.email, size: 18, color: Colors.white)
+              ? const Icon(Icons.email, size: 18, color: Colors.white)
               : Container(
                   height: 18,
                   width: 18,

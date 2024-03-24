@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color primaryColor = Color(0xff1877f2);
+  static const Color fullWhite = Color(0xffffffff);
 }
 
 class LightTheme {
@@ -19,5 +20,4 @@ class DarkTheme {
   static const Color whiteMediumColor = Color(0xfff5f5f5);
   static const Color whiteLightColor = Color(0xffB2B2B2);
   static const Color whiteVeryLightColor = Color(0xff7C7C7C);
-
 }

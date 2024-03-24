@@ -47,12 +47,11 @@ class _IntroductionPageState extends State<IntroductionPage> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(10),
                     alignment: Alignment.center,
-                    height: mHeight * 15,
-                    width: 40,
+                    height: mHeight * 20,
+                    width: double.infinity,
                     child: const Image(
-                        image: AssetImage(introductionImage),
+                        image: AssetImage(AssetConstants.introductionImage),
                         fit: BoxFit.contain),
                   ),
                   SizedBox(
@@ -65,9 +64,13 @@ class _IntroductionPageState extends State<IntroductionPage> {
                           const SizedBox(height: 12),
                           Container(
                             height: mHeight * 12,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage(lightLogoImage),
+                                image: AssetImage(
+                                    Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? AssetConstants.lightAppLogo
+                                        : AssetConstants.darkAppLogo),
                                 fit: BoxFit.contain,
                               ),
                             ),
@@ -105,10 +108,14 @@ class _IntroductionPageState extends State<IntroductionPage> {
                   children: <Widget>[
                     Container(
                       height: 28,
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(AssetConstants.lightIconPath),
-                              fit: BoxFit.contain)),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                                Theme.of(context).brightness == Brightness.light
+                                    ? AssetConstants.lightAppIcon
+                                    : AssetConstants.darkAppIcon),
+                            fit: BoxFit.contain),
+                      ),
                     ),
                     const SizedBox(height: 24),
                     BuildButtonWithIcon(

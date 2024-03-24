@@ -4,7 +4,7 @@ class AssetConstants {
   static const String introductionImage =
       'lib/assets/imageAssets/introductionImage.png';
   static const String signingImage = 'lib/assets/imageAssets/signing_image.png';
-  static const String googleLogo = 'libs/assets/imageAssets/google_logo.png';
+  static const String googleLogo = 'lib/assets/imageAssets/google_logo.png';
 
   // Light theme specific assets
   static const String lightAppLogo = 'lib/assets/light/app_logo.png';

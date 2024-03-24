@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ///_______________________________________________________________________________TEXT WIDGETS
-Text smallText(String text, BuildContext context) => Text(
+
+    Text normalCenteredText(String text, FontWeight fontWeight, BuildContext context) => Text(
       text,
+      textAlign: TextAlign.center,
       style: GoogleFonts.roboto(
         color: Theme.of(context).dividerColor,
-        fontSize: 11,
+        fontWeight: fontWeight,
+        fontSize: 12,
       ),
     );
 
@@ -17,6 +20,28 @@ Text normalText(String text, BuildContext context) => Text(
         fontSize: 12,
       ),
     );
+
+Text veryBigTextBold(String text, double mHeight, BuildContext context) => Text(
+      text,
+      style: GoogleFonts.leagueSpartan(
+        fontSize: mHeight * 4,
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).dividerColor,
+      ),
+    );
+
+
+
+//______________________________________
+Text smallText(String text, BuildContext context) => Text(
+      text,
+      style: GoogleFonts.roboto(
+        color: Theme.of(context).dividerColor,
+        fontSize: 11,
+      ),
+    );
+
+
 
 Text normalLeftText(String text, BuildContext context) => Text(
   text,
@@ -43,15 +68,7 @@ Text normalSizeBoldText(String text, double sizeFont, BuildContext context) =>
           fontWeight: FontWeight.bold),
     );
 
-Text normalCenteredText(String text, FontWeight fontWeight, BuildContext context) => Text(
-      text,
-      textAlign: TextAlign.center,
-      style: GoogleFonts.roboto(
-        color: Theme.of(context).dividerColor,
-        fontWeight: fontWeight,
-        fontSize: 12,
-      ),
-    );
+
 
 Text smallCenteredText(String text, FontWeight fontWeight, BuildContext context) => Text(
   text,
@@ -122,14 +139,7 @@ Text bigNormalColoredText(String text, Color txtColor) => Text(
       ),
     );
 
-Text veryBigTextBold(String text, double mHeight, BuildContext context) => Text(
-      text,
-      style: GoogleFonts.leagueSpartan(
-        fontSize: mHeight * 4,
-        fontWeight: FontWeight.bold,
-        color: Theme.of(context).dividerColor,
-      ),
-    );
+
 
 Text veryBigColoredTextBold(String text, Color txtColor) => Text(
       text,
@@ -213,14 +223,7 @@ Container bigTermsBoldText(String text, BuildContext context) => Container(
       ),
     );
 
-Text bigCenteredText(String text, BuildContext context) => Text(
-      text,
-      textAlign: TextAlign.center,
-      style: GoogleFonts.roboto(
-        color: Theme.of(context).dividerColor,
-        fontSize: 13,
-      ),
-    );
+
 
 ///_______________________________________________________________________________ICON WIDGETS
 Icon normalIcon(IconData iconData, BuildContext context) => Icon(

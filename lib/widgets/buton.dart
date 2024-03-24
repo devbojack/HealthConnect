@@ -20,7 +20,7 @@ class BuildButton extends StatelessWidget {
     SizeConfig().init(context);
 
     return ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryColor,
             foregroundColor: Colors.white,
@@ -47,31 +47,14 @@ class BuildButtonWithIcon extends StatelessWidget {
     SizeConfig().init(context);
     double mWidth = SizeConfig.blockSizeW!;
     return ElevatedButton(
-      onPressed: () {},
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all(
-            const EdgeInsets.symmetric(horizontal: 32)),
-        backgroundColor: isEmail
-            ? MaterialStateProperty.all<Color>(AppColors.primaryColor)
-            : MaterialStateProperty.all<Color>(Colors.white),
-        side: MaterialStateProperty.all(
-            BorderSide(color: Theme.of(context).dividerColor.withOpacity(0.3))),
-        minimumSize: MaterialStateProperty.all(const Size(300, 48)),
-        shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-        overlayColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered)) {
-              return isEmail
-                  ? AppColors.primaryColor.withOpacity(0.3)
-                  : Colors.white.withOpacity(0.3);
-            }
-            if (states.contains(MaterialState.focused) ||
-                states.contains(MaterialState.pressed)) {
-              return isEmail ? AppColors.primaryColor : Colors.white;
-            }
-            return null; // Defer to the widget's default.
-          },
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isEmail ? AppColors.primaryColor : Colors.white,
+        foregroundColor: isEmail ? Colors.white : Colors.black,
+        shadowColor: Colors.black.withOpacity(0.4),
+        minimumSize: const Size(300, 48),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
       child: Row(
@@ -79,10 +62,10 @@ class BuildButtonWithIcon extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           isEmail
-              ? const Icon(Icons.email, size: 18, color: Colors.white)
+              ? const Icon(Icons.email, size: 20, color: Colors.white)
               : Container(
-                  height: 18,
-                  width: 18,
+                  height: 20,
+                  width: 20,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(AssetConstants.googleLogo),
@@ -95,7 +78,7 @@ class BuildButtonWithIcon extends StatelessWidget {
             isEmail ? 'Continue with Email' : 'Continue with Google',
             style: GoogleFonts.roboto(
               fontSize: 13,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w700,
               color: isEmail ? Colors.white : Colors.black,
             ),
           ),

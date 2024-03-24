@@ -68,7 +68,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                               image: DecorationImage(
                                 image: AssetImage(
                                     Theme.of(context).brightness ==
-                                            Brightness.light
+                                            Brightness.dark
                                         ? AssetConstants.lightAppLogo
                                         : AssetConstants.darkAppLogo),
                                 fit: BoxFit.contain,
@@ -76,8 +76,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                             ),
                           ),
                           const SizedBox(height: 24),
-                          bigCenteredText(
-                              "Bridging Wellness Together!", context)
+                          normalText("Bridging Wellness Together!", context)
                         ]),
                   ),
                   BuildButton(
@@ -99,19 +98,20 @@ class _IntroductionPageState extends State<IntroductionPage> {
         context: context,
         builder: (BuildContext context) {
           return SizedBox(
-            height: 200,
+            height: 260,
             child: Center(
               child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Container(
-                      height: 28,
+                      height: 16,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage(
-                                Theme.of(context).brightness == Brightness.light
+                                Theme.of(context).brightness == Brightness.dark
                                     ? AssetConstants.lightAppIcon
                                     : AssetConstants.darkAppIcon),
                             fit: BoxFit.contain),
@@ -138,6 +138,23 @@ class _IntroductionPageState extends State<IntroductionPage> {
                         },
                         isEmail: false),
                     const SizedBox(height: 32),
+                    Center( child: RichText(
+                      text: TextSpan(
+                          text: 'By continuing, you are accepting our ',
+                          style: TextStyle(
+                            fontSize: 12,
+                              color: Theme.of(context).indicatorColor),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: 'Terms & Conditions',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.red
+                                        : Colors.green))
+                          ]),
+                    ),)
                   ],
                 ),
               ),

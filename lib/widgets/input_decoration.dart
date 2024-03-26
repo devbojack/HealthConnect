@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import '../model/new_styles.dart';
 
 
 InputDecoration inputDecoration(String label, BuildContext context) => InputDecoration(
   labelText: label,
-  labelStyle: TextStyle(fontSize: 11, color: Theme.of(context).indicatorColor),
+  labelStyle: smallTextStyle(context),
   errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(6),
       borderSide: const BorderSide(color: Colors.redAccent, width: 0.8)),

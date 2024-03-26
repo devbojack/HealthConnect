@@ -1,7 +1,7 @@
 # All test cases
 /lib/tests/
 /test/
-
+/lib/identifications/
 # Miscellaneous
 *.class
 *.log

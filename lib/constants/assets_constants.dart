@@ -3,7 +3,7 @@ class AssetConstants {
   // Auth
   static const String introductionImage =
       'lib/assets/imageAssets/introductionImage.png';
-  static const String signingImage = 'lib/assets/imageAssets/signing_image.png';
+  static const String emailAuthLogo = 'lib/assets/imageAssets/signing_image.png';
   static const String googleLogo = 'lib/assets/imageAssets/google_logo.png';
 
   // Light theme specific assets

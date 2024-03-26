@@ -1,21 +1,92 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:healthconnect/providers/theme_provider.dart';
-import 'screens/authentication_screens/google_auth/google_auth_page.dart';
-import 'screens/authentication_screens/introduction_page.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:healthconnect/identifications/secret_ids.dart';
+import 'package:healthconnect/pages/app_wrapper/app_checker.dart';
+import 'package:healthconnect/pages/signing/google_signin_provider.dart';
+import 'package:healthconnect/provider/theme_provider.dart';
+import 'package:overlay_support/overlay_support.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+//________________________________________________________________________________________APP KEY CONSTANTS
+const appVersion = "1.0.0";
+const appBundle = 'com.isurebets.surebets';
+const appName = "Sure Bets Predictions";
+bool isNotificationOn = true;
+bool isLightTheme = true;
+//________________________________________________________________________________________
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+  'HC_1', // id
+  'HealthConnect Notifications', // title
+  description: 'HealthConnect notifications.',
+  importance: Importance.max,
+);
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+///_____________________________________________________________________________
+///___________________________START OF MAIN_________________________///
+///_____________________________________________________________________________
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //____________________________________________________________________________Firebase Initialize
+  await Firebase.initializeApp(
+      options: const FirebaseOptions(
+    apiKey: FirebaseOptionsIds.apiKey,
+    appId: FirebaseOptionsIds.appId,
+    messagingSenderId: FirebaseOptionsIds.messagingSenderId,
+    projectId: FirebaseOptionsIds.projectId,
+    storageBucket: FirebaseOptionsIds.storageBucket,
+  ));
+
+  //____________________________________________________________________________Notification
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  isNotificationOn = (prefs.getBool('notifyMe') ?? true);
+
+  //_____________________________________________________________________________Set Device Settings
+  //____________________________________________ORIENTATION
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+
+  ///___________________________________________BRIGHTNESS
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<GoogleSignInProvider>(
+            create: (_) => GoogleSignInProvider()),
+        ChangeNotifierProvider<ThemeProvider>(
+            create: (_) => ThemeProvider()..initialize()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+//_______________________________________________________________________________________________________MY APP
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        // theme: MyThemes.lightTheme,
-        theme: MyThemes.darkTheme,
-        title: 'Health Connect',
-        home: const SigningPage(isSigningIn: true));
+    return Consumer<ThemeProvider>(builder: (context, provider, child) {
+      return OverlaySupport.global(
+          child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: appName,
+              themeMode: provider.themeMode,
+              darkTheme: MyThemes.darkTheme,
+              theme: MyThemes.lightTheme,
+              home: const AppChecker()));
+    });
   }
 }

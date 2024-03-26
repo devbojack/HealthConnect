@@ -4,25 +4,17 @@ import 'package:google_fonts/google_fonts.dart';
 ///_______________________________________________________________________________TEXT WIDGETS
 Text smallText(String text, BuildContext context) => Text(
       text,
-      style: GoogleFonts.roboto(
-        color: Theme.of(context).dividerColor,
-        fontSize: 11,
-      ),
+      style: Theme.of(context).textTheme.bodySmall,
     );
 
 Text normalText(String text, BuildContext context) => Text(
       text,
-      style: GoogleFonts.roboto(
-        color: Theme.of(context).dividerColor,
-        fontSize: 12,
-      ),
+      style: Theme.of(context).textTheme.bodyMedium,
     );
 
 Text normalLeftText(String text, BuildContext context) => Text(
   text,
-  style: GoogleFonts.roboto(
-    color: Theme.of(context).dividerColor,
-    fontSize: 12),
+  style: Theme.of(context).textTheme.bodyMedium,
   textAlign: TextAlign.left,
 );
 
@@ -91,11 +83,7 @@ Text normalBoldColoredText(String text, Color txtColor) => Text(
 
 Text bigNormalBoldText(String text, BuildContext context) => Text(
       text,
-      style: GoogleFonts.roboto(
-        color: Theme.of(context).dividerColor,
-        fontSize: 15,
-        fontWeight: FontWeight.bold,
-      ),
+      style: Theme.of(context).textTheme.titleMedium
     );
 
 Text bigNormalBoldColoredText(String text, Color txtColor) => Text(
@@ -106,11 +94,7 @@ Text bigNormalBoldColoredText(String text, Color txtColor) => Text(
 
 Text bigNormalText(String text, BuildContext context) => Text(
       text,
-      style: GoogleFonts.roboto(
-        color: Theme.of(context).dividerColor,
-        fontSize: 15,
-        // fontWeight: FontWeight.bold,
-      ),
+      style: Theme.of(context).textTheme.bodyLarge
     );
 
 Text bigNormalColoredText(String text, Color txtColor) => Text(

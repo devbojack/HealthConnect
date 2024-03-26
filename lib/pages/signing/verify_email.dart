@@ -27,6 +27,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     double mHeight = SizeConfig.blockSizeH!;
+    double mWidth = SizeConfig.blockSizeW!;
     bool isTablet = SizeConfig.blockSizeW! > 600;
     return MyBackground(
       child: SafeArea(
@@ -54,7 +55,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
-              children: [verifyHeader(mHeight), verifyBody(mHeight)],
+              children: [verifyHeader(mHeight, mWidth), verifyBody(mHeight)],
             ),
           ),
         ),
@@ -62,7 +63,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
     );
   }
 
-  verifyHeader(double mHeight) => Expanded(
+  verifyHeader(double mHeight, double mWidth) => Expanded(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,7 +71,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
           children: [
             Column(
               children: [
-                ProLogo(mHeight: mHeight),
+                ProLogo(mHeight: mHeight, mWidth: mWidth),
                 const SizedBox(height: 24),
                 veryBigTextBold('Verify Your Account', mHeight, context),
                 const SizedBox(height: 32),

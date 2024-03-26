@@ -50,9 +50,9 @@ class FirebaseErrorPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              bigNormalBoldText('Something went wrong', context),
+              Text('Something went wrong', style: Theme.of(context).textTheme.bodyLarge),
               const SizedBox(height: 40),
-              normalText('Please restart the application', context),
+              Text('Please restart the application', style: Theme.of(context).textTheme.bodyMedium),
             ],
           ),
         ),

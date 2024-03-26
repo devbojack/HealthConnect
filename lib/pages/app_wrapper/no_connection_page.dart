@@ -45,7 +45,7 @@ class _NoInternetConnectionPageState extends State<NoInternetConnectionPage> {
                     child:
                     Icon(Icons.info_outline, size: mHeight * 12, color: Theme.of(context).dividerColor,)
                 ),
-                veryBigTextBold('No Internet Connection', mHeight, context),
+                Text('No Internet Connection',style: Theme.of(context).textTheme.titleMedium),
                 const SizedBox(height: 8),
                 SizedBox(
                     width: mWidth * 20,
@@ -55,7 +55,7 @@ class _NoInternetConnectionPageState extends State<NoInternetConnectionPage> {
                     )),
                 const SizedBox(height: 32),
                 SizedBox(
-                  child: normalText('Please check your Wi-Fi or mobile data network and try again.', context),
+                  child: Text('Please check your Wi-Fi or mobile data network and try again.', style: Theme.of(context).textTheme.titleMedium),
                 ),
                 const SizedBox(height: 32),
                 BuildSmallRoundButton(

@@ -50,6 +50,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     FocusScopeNode currentScope = FocusScope.of(context);
     SizeConfig().init(context);
     double mHeight = SizeConfig.blockSizeH!;
+    double mWidth = SizeConfig.blockSizeW!;
     bool isTablet = SizeConfig.blockSizeW! > 600;
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -86,7 +87,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    ProLogo(mHeight: mHeight),
+                    ProLogo(mHeight: mHeight, mWidth: mWidth),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:healthconnect/pages/signing/signup_widget.dart';
@@ -27,7 +26,6 @@ class _SigningPageState extends State<SigningPage> {
     super.initState();
   }
 
-
   changeSigning() {
     setState(() {
       isSigningIn = !isSigningIn;
@@ -39,6 +37,7 @@ class _SigningPageState extends State<SigningPage> {
     FocusScopeNode currentScope = FocusScope.of(context);
     SizeConfig().init(context);
     double mHeight = SizeConfig.blockSizeH!;
+    double mWidth = SizeConfig.blockSizeW!;
     bool isTablet = SizeConfig.blockSizeW! > 600;
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -48,43 +47,42 @@ class _SigningPageState extends State<SigningPage> {
           currentScope.unfocus();
         }
       },
-      child:SizedBox(
-          height: double.infinity,
-          width: double.infinity,
-          child: SingleChildScrollView(
-            padding: isTablet
-                ? const EdgeInsets.symmetric(vertical: 12, horizontal: 40)
-                : const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                authHeader(mHeight),
-                isSigningIn ? const LoginWidget() : const SignUpWidget(),
-                const SizedBox(height: 32),
-                createAccountOrLogIn()
-              ],
-            ),
+      child: SizedBox(
+        height: double.infinity,
+        width: double.infinity,
+        child: SingleChildScrollView(
+          padding: isTablet
+              ? const EdgeInsets.symmetric(vertical: 12, horizontal: 40)
+              : const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              authHeader(mHeight, mWidth),
+              isSigningIn ? const LoginWidget() : const SignUpWidget(),
+              const SizedBox(height: 32),
+              createAccountOrLogIn()
+            ],
           ),
         ),
+      ),
     );
   }
 
   //___________________________________________________WIDGETS
-  authHeader(double mHeight)=>Column(
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      ProLogo(mHeight: mHeight),
-      const SizedBox(height: 16),
-      veryBigTextBold(
-          isSigningIn ? 'Sign In' : 'Create Account', mHeight,
-          context),
-      const SizedBox(height: 16),
-    ],
-  );
+  authHeader(double mHeight, double mWidth) => Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ProLogo(mHeight: mHeight, mWidth: mWidth),
+          const SizedBox(height: 16),
+          veryBigTextBold(
+              isSigningIn ? 'Sign In' : 'Create Account', mHeight, context),
+          const SizedBox(height: 16),
+        ],
+      );
 
   createAccountOrLogIn() => SizedBox(
         width: double.infinity,

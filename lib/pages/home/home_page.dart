@@ -108,9 +108,15 @@ class _HomePageState extends State<HomePage> {
               controller: _controller,
               screens: [
                 SettingsPage(
-                    mHeight: mHeight,
-                    mWidth: mWidth,
-                    isTablet: isTablet,)
+                  mHeight: mHeight,
+                  mWidth: mWidth,
+                  isTablet: isTablet,
+                ),
+                SettingsPage(
+                  mHeight: mHeight,
+                  mWidth: mWidth,
+                  isTablet: isTablet,
+                )
               ],
               items: _navBarItems(context),
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,

@@ -32,7 +32,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
               appBar: AppBar(
                   automaticallyImplyLeading: false,
                   elevation: 0,
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   actions: isIntroPage
                       ? []
                       : [

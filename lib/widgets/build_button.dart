@@ -82,7 +82,7 @@ class NonBlueButton extends StatelessWidget {
               }
               if (states.contains(MaterialState.focused) ||
                   states.contains(MaterialState.pressed)) {
-                return Colors.blue.withOpacity(0.12);
+                return Colors.blue.withOpacity(0.0);
               }
               return null; // Defer to the widget's default.
             },

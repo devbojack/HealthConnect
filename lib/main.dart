@@ -12,9 +12,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:firebase_options.dart';
 
 //________________________________________________________________________________________APP KEY CONSTANTS
-const appVersion = "1.0.0";
-const appBundle = 'com.isurebets.surebets';
-const appName = "Sure Bets Predictions";
+const appVersion = ApplicationDetails.appVersion;
+const appBundle = ApplicationDetails.appBundle;
+const appName = ApplicationDetails.appName;
 bool isNotificationOn = true;
 bool isLightTheme = true;
 //________________________________________________________________________________________

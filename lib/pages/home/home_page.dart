@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthconnect/pages/home/home_loading_page.dart';
+import 'package:healthconnect/pages/home/notifications_page.dart';
+import 'package:healthconnect/pages/home/search_page.dart';
 import 'package:healthconnect/pages/home/settings_page.dart';
 import 'package:healthconnect/pages/signing/verify_email.dart';
 import 'package:healthconnect/widgets/my_background.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:provider/provider.dart';
 import '../../constants/new_color_constants.dart';
 import '../../provider/size_config.dart';
 
@@ -36,7 +38,29 @@ class _HomePageState extends State<HomePage> {
           color: Theme.of(context).disabledColor,
         ),
         iconSize: 22,
-        title: ("Today"),
+        title: ("Home"),
+        activeColorPrimary: appBlue,
+        inactiveColorPrimary: Theme.of(context).disabledColor,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.settings, color: Theme.of(context).dividerColor),
+        inactiveIcon: Icon(
+          Icons.search,
+          color: Theme.of(context).disabledColor,
+        ),
+        iconSize: 22,
+        title: ("Search"),
+        activeColorPrimary: appBlue,
+        inactiveColorPrimary: Theme.of(context).disabledColor,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.settings, color: Theme.of(context).dividerColor),
+        inactiveIcon: Icon(
+          Icons.notifications,
+          color: Theme.of(context).disabledColor,
+        ),
+        iconSize: 22,
+        title: ("Notification"),
         activeColorPrimary: appBlue,
         inactiveColorPrimary: Theme.of(context).disabledColor,
       ),
@@ -47,7 +71,7 @@ class _HomePageState extends State<HomePage> {
           color: Theme.of(context).disabledColor,
         ),
         iconSize: 22,
-        title: ("More"),
+        title: ("Preferences"),
         activeColorPrimary: appBlue,
         inactiveColorPrimary: Theme.of(context).disabledColor,
       ),
@@ -107,16 +131,14 @@ class _HomePageState extends State<HomePage> {
               context,
               controller: _controller,
               screens: [
+                HomeLoadingPage(),
                 SettingsPage(
                   mHeight: mHeight,
                   mWidth: mWidth,
                   isTablet: isTablet,
                 ),
-                SettingsPage(
-                  mHeight: mHeight,
-                  mWidth: mWidth,
-                  isTablet: isTablet,
-                )
+                SearchPage(),
+                NotificationsPage()
               ],
               items: _navBarItems(context),
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,

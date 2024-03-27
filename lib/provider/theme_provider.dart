@@ -24,7 +24,8 @@ class ThemeProvider extends ChangeNotifier {
     currentTheme = theme;
     notifyListeners();
   }
-  initialize() async{
+
+  initialize() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     currentTheme = prefs.getString("theme") ?? "system";
     notifyListeners();
@@ -66,11 +67,11 @@ class MyThemes {
         color: ColorConstants.lightTextColor,
         fontWeight: FontWeight.normal,
       ),
-      
     ),
     progressIndicatorTheme:
         const ProgressIndicatorThemeData(color: ColorConstants.lightTextColor),
     // cardColor: cardColorLight,
+    disabledColor: Colors.black26,
     colorScheme: ColorScheme.fromSwatch().copyWith(brightness: Brightness.dark),
     // hoverColor: Colors.black,
     iconTheme: const IconThemeData(color: ColorConstants.lightTextColor),
@@ -83,14 +84,14 @@ class MyThemes {
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     ),
-    navigationBarTheme:
-        const NavigationBarThemeData(backgroundColor: ColorConstants.lightBackground,),
+    navigationBarTheme: const NavigationBarThemeData(
+      backgroundColor: ColorConstants.lightBackground,
+    ),
     bottomAppBarTheme: const BottomAppBarTheme(
       color: Colors.transparent,
     ),
     dividerColor: ColorConstants.lightTextColor,
   );
-
 
   static final darkTheme = ThemeData(
     primaryColor: ColorConstants.appBlue,
@@ -127,11 +128,12 @@ class MyThemes {
         fontWeight: FontWeight.normal,
       ),
     ),
-    progressIndicatorTheme: const ProgressIndicatorThemeData(color: ColorConstants.darkTextColor),
+    progressIndicatorTheme:
+        const ProgressIndicatorThemeData(color: ColorConstants.darkTextColor),
     colorScheme:
         ColorScheme.fromSwatch().copyWith(brightness: Brightness.light),
     // cardColor: cardColorDark,
-    // disabledColor: inActiveIconDark,
+    disabledColor: Colors.white.withOpacity(0.6),
     // canvasColor: tipsContainerColorDark,
     // hoverColor: cardBorderColorDark,
     // highlightColor: whitishWhiteColor,
@@ -139,7 +141,6 @@ class MyThemes {
     // secondaryHeaderColor: chosenTipsContainerDark,
     // hintColor: matchStartTimeDark,
     // shadowColor: tipsCardShadowColorDark,
-    
     bottomAppBarTheme: const BottomAppBarTheme(color: Colors.transparent),
     appBarTheme: AppBarTheme(
       color: ColorConstants.darkBackground,
@@ -153,7 +154,7 @@ class MyThemes {
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     ),
-    navigationBarTheme:
-        const NavigationBarThemeData(backgroundColor: ColorConstants.darkBackground),
+    navigationBarTheme: const NavigationBarThemeData(
+        backgroundColor: ColorConstants.darkBackground),
   );
 }

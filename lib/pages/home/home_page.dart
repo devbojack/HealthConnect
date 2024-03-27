@@ -132,13 +132,13 @@ class _HomePageState extends State<HomePage> {
               controller: _controller,
               screens: [
                 HomeLoadingPage(),
+                SearchPage(),
+                NotificationsPage(),
                 SettingsPage(
                   mHeight: mHeight,
                   mWidth: mWidth,
                   isTablet: isTablet,
                 ),
-                SearchPage(),
-                NotificationsPage()
               ],
               items: _navBarItems(context),
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,

@@ -6,6 +6,7 @@ class AssetConstants {
   static const String emailAuthLogo =
       'lib/assets/image_assets/signing_image.png';
   static const String googleLogo = 'lib/assets/image_assets/google_logo.png';
+  static const String appBarLogo = 'lib/assets/image_assets/app_bar_logo.png';
 
   // Light theme specific assets
   static const String lightAppLogo =

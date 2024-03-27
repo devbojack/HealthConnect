@@ -99,32 +99,32 @@ class MyThemes {
     textTheme: TextTheme(
       titleLarge: GoogleFonts.roboto(
         fontSize: 20,
-        color: ColorConstants.lightTextColor,
+        color: ColorConstants.darkTextColor,
         fontWeight: FontWeight.bold,
       ),
       titleMedium: GoogleFonts.roboto(
         fontSize: 16,
-        color: ColorConstants.lightTextColor,
+        color: ColorConstants.darkTextColor,
         fontWeight: FontWeight.bold,
       ),
       titleSmall: GoogleFonts.roboto(
         fontSize: 14,
-        color: ColorConstants.lightTextColor,
+        color: ColorConstants.darkTextColor,
         fontWeight: FontWeight.bold,
       ),
       bodyLarge: GoogleFonts.roboto(
         fontSize: 14,
-        color: ColorConstants.lightTextColor,
+        color: ColorConstants.darkTextColor,
         fontWeight: FontWeight.normal,
       ),
       bodyMedium: GoogleFonts.roboto(
         fontSize: 12,
-        color: ColorConstants.lightTextColor,
+        color: ColorConstants.darkTextColor,
         fontWeight: FontWeight.normal,
       ),
       bodySmall: GoogleFonts.roboto(
         fontSize: 11,
-        color: ColorConstants.lightTextColor,
+        color: ColorConstants.darkTextColor,
         fontWeight: FontWeight.normal,
       ),
     ),

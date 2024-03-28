@@ -15,7 +15,7 @@ class MyBackground extends StatelessWidget {
       child: AnnotatedRegion(
         value: SystemUiOverlayStyle(
           statusBarColor: Theme.of(context).scaffoldBackgroundColor,
-          systemNavigationBarColor: Theme.of(context).scaffoldBackgroundColor,
+          systemNavigationBarColor: Theme.of(context).cardColor,
           statusBarIconBrightness: Theme.of(context).colorScheme.brightness,
           systemNavigationBarIconBrightness: Theme.of(context).colorScheme.brightness,
         ),

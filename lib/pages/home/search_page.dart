@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthconnect/widgets/home_appbar.dart';
 import 'package:healthconnect/widgets/my_background.dart';
 
 class SearchPage extends StatefulWidget {
@@ -11,8 +12,8 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
-    return MyBackground(child: Scaffold(body: Container(
-      color: Colors.green
-    )));
+    return MyBackground(
+        child: Scaffold(
+            appBar: homeAppBar(context), body: Container(color: Colors.green),),);
   }
 }

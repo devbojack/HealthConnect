@@ -29,13 +29,12 @@ class _NoInternetPageState extends State<NoInternetPage> {
       child: SafeArea(
         child: Scaffold(
           body: isLoading
-              ? const Center(
-                  child: SbLoading()
-                )
+              ? const Center(child: SbLoading())
               : Container(
                   width: double.infinity,
                   height: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,18 +47,23 @@ class _NoInternetPageState extends State<NoInternetPage> {
                             Lottie.asset(noInternetLottie, fit: BoxFit.contain),
                       ),
                       Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          veryBigTextBold('No Internet Connection', mHeight, context),
+                          veryBigTextBold(
+                              'No Internet Connection', mHeight, context),
                           const SizedBox(height: 8),
                           SizedBox(
                               width: mWidth * 20,
                               child: Divider(
-                                color: Theme.of(context).dividerColor,
-                                thickness: 1
-                              )),
+                                  color: Theme.of(context).dividerColor,
+                                  thickness: 1)),
                           const SizedBox(height: 32),
                           SizedBox(
-                            child: normalText('Please check your Wi-Fi or mobile data network and try again.', context),
+                            child: Text(
+                                'Please check your Wi-Fi or mobile data network and try again.',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                                textAlign: TextAlign.center),
                           ),
                         ],
                       ),

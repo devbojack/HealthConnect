@@ -68,4 +68,8 @@ packages/
 
 # Firebase specific
 android/app/google-services.json
+<<<<<<< HEAD
 ios/Runner/GoogleService-Info.plist
+=======
+ios/Runner/GoogleService-Info.plist
+>>>>>>> v1.0

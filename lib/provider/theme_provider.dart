@@ -70,8 +70,8 @@ class MyThemes {
     ),
     progressIndicatorTheme:
         const ProgressIndicatorThemeData(color: ColorConstants.lightTextColor),
-    // cardColor: cardColorLight,
-    disabledColor: Colors.black26,
+    cardColor: Color(0xffe3f2fd),
+    disabledColor: Colors.black.withOpacity(0.65),
     colorScheme: ColorScheme.fromSwatch().copyWith(brightness: Brightness.dark),
     // hoverColor: Colors.black,
     iconTheme: const IconThemeData(color: ColorConstants.lightTextColor),
@@ -85,17 +85,18 @@ class MyThemes {
       ),
     ),
     navigationBarTheme: const NavigationBarThemeData(
-      backgroundColor: ColorConstants.lightBackground,
+      backgroundColor: Color(0xffe3f2fd),
     ),
     bottomAppBarTheme: const BottomAppBarTheme(
-      color: Colors.transparent,
+      color: Color(0xffe3f2fd),
     ),
     dividerColor: ColorConstants.lightTextColor,
   );
 
   static final darkTheme = ThemeData(
     primaryColor: ColorConstants.appBlue,
-    scaffoldBackgroundColor: ColorConstants.darkBackground,
+    // scaffoldBackgroundColor: ColorConstants.darkBackground,
+    scaffoldBackgroundColor: Color(0xff0F141A),
     textTheme: TextTheme(
       titleLarge: GoogleFonts.roboto(
         fontSize: 20,
@@ -132,8 +133,8 @@ class MyThemes {
         const ProgressIndicatorThemeData(color: ColorConstants.darkTextColor),
     colorScheme:
         ColorScheme.fromSwatch().copyWith(brightness: Brightness.light),
-    // cardColor: cardColorDark,
-    disabledColor: Colors.white.withOpacity(0.6),
+    cardColor: Color(0xff1B2026),
+    disabledColor: Colors.white.withOpacity(0.65),
     // canvasColor: tipsContainerColorDark,
     // hoverColor: cardBorderColorDark,
     // highlightColor: whitishWhiteColor,
@@ -141,7 +142,7 @@ class MyThemes {
     // secondaryHeaderColor: chosenTipsContainerDark,
     // hintColor: matchStartTimeDark,
     // shadowColor: tipsCardShadowColorDark,
-    bottomAppBarTheme: const BottomAppBarTheme(color: Colors.transparent),
+    bottomAppBarTheme: const BottomAppBarTheme(color: Color(0xff0b132b)),
     appBarTheme: AppBarTheme(
       color: ColorConstants.darkBackground,
       elevation: 0,
@@ -155,6 +156,7 @@ class MyThemes {
       ),
     ),
     navigationBarTheme: const NavigationBarThemeData(
-        backgroundColor: ColorConstants.darkBackground),
+      backgroundColor: Color(0xff0b132b),
+    ),
   );
 }

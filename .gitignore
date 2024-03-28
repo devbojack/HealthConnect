@@ -1,3 +1,7 @@
+# All test cases
+/lib/tests/
+/test/
+/lib/identifications/
 # Miscellaneous
 *.class
 *.log
@@ -41,3 +45,27 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Flutter/Dart specific
+**/build/
+.dart_tool/
+.pub/
+packages/
+
+# IDE files
+.idea/
+.vscode/
+
+# Flutter generated files
+*.iml
+*.lock
+*.log
+*.metadata
+.DS_Store
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-plugins-dependencies.lock
+
+# Firebase specific
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist

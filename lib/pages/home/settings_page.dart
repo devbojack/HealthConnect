@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:healthconnect/constants/color_constants.dart';
 import 'package:healthconnect/pages/options/privacy_policy.dart';
 import 'package:healthconnect/provider/theme_provider.dart';
 import 'package:healthconnect/widgets/text_icon_widgets.dart';
@@ -55,7 +57,7 @@ class _SettingsPageState extends State<SettingsPage> {
         child: SafeArea(
           child: Scaffold(
             resizeToAvoidBottomInset: true,
-            appBar: homeAppBar(appName, context),
+            appBar: homeAppBar(context),
             body: Padding(
               padding: widget.isTablet
                   ? const EdgeInsets.symmetric(horizontal: 32, vertical: 8)
@@ -77,8 +79,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         'Notifications',
                         Switch(
                             activeColor: Theme.of(context).primaryColor,
-                            activeTrackColor:
-                                Theme.of(context).dividerColor,
+                            activeTrackColor: Theme.of(context).dividerColor,
                             inactiveThumbColor: Colors.white,
                             inactiveTrackColor: Colors.black54,
                             value: status,
@@ -121,8 +122,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       }),
                     ),
                     //____________________________________________________________LANGUAGES
-                    _buildTitle('Languages', context),
-                    myDiv(context),
+                    // _buildTitle('Languages', context),
+                    // myDiv(context),
                     // GestureDetector(
                     //   behavior: HitTestBehavior.translucent,
                     //   onTap: () {
@@ -131,12 +132,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     //         child: const LanguagePage()));
                     //   },
                     //   child:
-                    moreSettings(
-                        widget.mHeight,
-                        languageColor,
-                        Icons.privacy_tip_outlined,
-                        'Unavailable (Version $appVersion)',
-                        Container(color: Colors.transparent)),
+                    // moreSettings(
+                    //     widget.mHeight,
+                    //     languageColor,
+                    //     Icons.privacy_tip_outlined,
+                    //     'Unavailable (Version $appVersion)',
+                    //     Container(color: Colors.transparent)),
                     // ),
                     //_____________________________________________________________CONTACT US
                     _buildTitle('Contact us', context),
@@ -160,7 +161,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
                     const Divider(color: Colors.transparent),
-                     //_____________________________________________________________PRIVACY POLICY
+                    //_____________________________________________________________PRIVACY POLICY
                     _buildTitle('Privacy policy', context),
                     myDiv(context),
                     GestureDetector(
@@ -207,18 +208,18 @@ class _SettingsPageState extends State<SettingsPage> {
 
   //_____________________________________________________________________________Build More Title
   Widget _buildTitle(String title, BuildContext context) => Padding(
-      padding: const EdgeInsets.only(top: 26, bottom: 4),
+      padding: const EdgeInsets.only(top: 16, bottom: 4),
       child: normalSizeBoldText(title, 13, context));
 
   ///_____________________________________________________________________________Build Divider
   Divider myDiv(BuildContext context) =>
-      Divider(color: Theme.of(context).dividerColor);
+      Divider(color: Theme.of(context).dividerColor.withOpacity(0.6));
 
   ///______________________________________________________________________________Contact us
   Widget moreSettings(double mHeight, Color boxColor, IconData leadingIcon,
           String moreSettings, Widget widget) =>
       Container(
-        padding: const EdgeInsets.only(top: 8, bottom: 0),
+        padding: const EdgeInsets.only(top: 6, bottom: 0),
         child: Row(
           children: [
             Container(
@@ -230,7 +231,12 @@ class _SettingsPageState extends State<SettingsPage> {
               child: Icon(leadingIcon, color: fullWhite, size: 16),
             ),
             const SizedBox(width: 16),
-            normalText(moreSettings, context),
+            Text(moreSettings,
+                style: GoogleFonts.roboto(
+                  fontSize: 12,
+                  fontWeight: FontWeight.normal,
+                  color: Theme.of(context).dividerColor,
+                )),
             const Spacer(),
             widget
           ],
@@ -238,13 +244,15 @@ class _SettingsPageState extends State<SettingsPage> {
       );
 
   Widget signOutButton() => Container(
-        padding: const EdgeInsets.only(top: 12, bottom: 0),
+        padding: const EdgeInsets.only(top: 4, bottom: 0),
         child: GestureDetector(
           onTap: signOut,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [bigNormalBoldColoredText('Sign out', newAppBlue)],
+            children: [
+              bigNormalBoldColoredText('Sign out', ColorConstants.appBlue)
+            ],
           ),
         ),
       );
@@ -279,7 +287,7 @@ Widget extendedForwardIcon(String text, BuildContext context) => Row(
 ///_____________________________________________________________________________Forward arrow
 Widget forwardIcon(BuildContext context) =>
     Icon(Icons.arrow_forward_ios_rounded,
-        color: Theme.of(context).highlightColor, size: 20);
+        color: Theme.of(context).dividerColor.withOpacity(0.5), size: 20);
 
 ///_____________________________________________________________________________set notify me
 Future setNotificationOn(value) async {

@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         inactiveColorPrimary: Theme.of(context).disabledColor,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.settings, color: Theme.of(context).dividerColor),
+        icon: Icon(Icons.search, color: Theme.of(context).dividerColor),
         inactiveIcon: Icon(
           Icons.search,
           color: Theme.of(context).disabledColor,
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
         inactiveColorPrimary: Theme.of(context).disabledColor,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.settings, color: Theme.of(context).dividerColor),
+        icon: Icon(Icons.notifications, color: Theme.of(context).dividerColor),
         inactiveIcon: Icon(
           Icons.notifications,
           color: Theme.of(context).disabledColor,
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
               items: _navBarItems(context),
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              backgroundColor: Theme.of(context).cardColor,
               confineInSafeArea: true,
               handleAndroidBackButtonPress: true,
               resizeToAvoidBottomInset: true,
@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
               popAllScreensOnTapOfSelectedTab: true,
               popActionScreens: PopActionScreensType.all,
               itemAnimationProperties: const ItemAnimationProperties(
-                duration: Duration(milliseconds: 100),
+                duration: Duration(milliseconds: 200),
                 curve: Curves.ease,
               ),
               screenTransitionAnimation: const ScreenTransitionAnimation(

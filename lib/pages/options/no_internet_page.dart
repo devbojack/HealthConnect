@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:healthconnect/constants/image_constants.dart';
 import 'package:healthconnect/provider/size_config.dart';
 import 'package:healthconnect/widgets/build_button.dart';
@@ -28,58 +29,50 @@ class _NoInternetPageState extends State<NoInternetPage> {
     return MyBackground(
       child: SafeArea(
         child: Scaffold(
-          body: isLoading
-              ? const Center(child: SbLoading())
-              : Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: mHeight * 2),
-                      SizedBox(
-                        height: mHeight * 25,
-                        child:
-                            Lottie.asset(noInternetLottie, fit: BoxFit.contain),
+          body: Container(
+            width: double.infinity,
+            height: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                    height: mHeight * 16,
+                    child: Icon(Icons.info_outlined,
+                        color: Theme.of(context).dividerColor)),
+                const SizedBox(height: 32),
+                veryBigTextBold('Something Went Wrong!', mHeight, context),
+                const SizedBox(height: 8),
+                SizedBox(
+                    width: mWidth * 20,
+                    child: Divider(
+                        color: Theme.of(context).dividerColor.withOpacity(0.7),
+                        thickness: 1)),
+                const SizedBox(height: 24),
+                SizedBox(
+                  child: Text('Please Try Reloading.',
+                      style: GoogleFonts.roboto(
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
+                        color: Theme.of(context).dividerColor.withOpacity(0.8),
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          veryBigTextBold(
-                              'No Internet Connection', mHeight, context),
-                          const SizedBox(height: 8),
-                          SizedBox(
-                              width: mWidth * 20,
-                              child: Divider(
-                                  color: Theme.of(context).dividerColor,
-                                  thickness: 1)),
-                          const SizedBox(height: 32),
-                          SizedBox(
-                            child: Text(
-                                'Please check your Wi-Fi or mobile data network and try again.',
-                                style: Theme.of(context).textTheme.bodyMedium,
-                                textAlign: TextAlign.center),
-                          ),
-                        ],
-                      ),
-                      Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 4.0, vertical: 16),
-                          width: SizeConfig.blockSizeW! * 80,
-                          child: BuildButton(
-                            onPressed: _animatedCheckNetIcon,
-                            buttonColor: newAppBlue,
-                            buttonTitle: 'TRY AGAIN',
-                          )),
-                      SizedBox(height: mHeight * 2),
-                    ],
-                  ),
+                      textAlign: TextAlign.center),
                 ),
+                Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 4.0, vertical: 16),
+                    width: SizeConfig.blockSizeW! * 80,
+                    child: BuildButton(
+                      onPressed: _animatedCheckNetIcon,
+                      buttonColor: Theme.of(context).primaryColor,
+                      buttonTitle: 'Retry',
+                    )),
+                SizedBox(height: mHeight * 2),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -78,10 +78,10 @@ class _SettingsPageState extends State<SettingsPage> {
                         Icons.notifications_none_outlined,
                         'Notifications',
                         Switch(
-                            activeColor: Theme.of(context).primaryColor,
-                            activeTrackColor: Theme.of(context).dividerColor,
+                            activeColor: Colors.white,
+                            activeTrackColor: Theme.of(context).primaryColor,
                             inactiveThumbColor: Colors.white,
-                            inactiveTrackColor: Colors.black54,
+                            inactiveTrackColor: Theme.of(context).brightness == Brightness.dark ? Colors.black.withOpacity(0.3) : Colors.white.withOpacity(0.3),
                             value: status,
                             onChanged: (value) {
                               setState(() {

@@ -133,7 +133,7 @@ class MyThemes {
         const ProgressIndicatorThemeData(color: ColorConstants.darkTextColor),
     colorScheme:
         ColorScheme.fromSwatch().copyWith(brightness: Brightness.light),
-    cardColor: Color(0xff1B2026),
+    cardColor: const Color(0xff1B2026),
     disabledColor: Colors.white.withOpacity(0.65),
     // canvasColor: tipsContainerColorDark,
     // hoverColor: cardBorderColorDark,

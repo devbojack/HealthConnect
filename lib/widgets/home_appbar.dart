@@ -14,11 +14,36 @@ AppBar homeAppBar(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(
-          height: 32,
-          width: 32,
-          child: Image.asset(AssetConstants.appBarLogo),
-        ),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 32,
+                width: 32,
+                child: Image.asset(AssetConstants.appLogo),
+              ),
+              const SizedBox(width: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children:[
+                  Text('Health',
+                  style: GoogleFonts.roboto(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).dividerColor.withOpacity(0.7))),
+                      Text('Connect',
+                  style: GoogleFonts.roboto(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).dividerColor.withOpacity(0.7))),
+
+                ]
+              )
+              
+            ]),
         SizedBox(
           height: 40,
           child: Row(children: [
@@ -56,8 +81,6 @@ AppBar homeAppBar(BuildContext context) {
                     ),
                   ),
                 ),
-                Text('HealthConnect',
-                    style: Theme.of(context).textTheme.bodyMedium),
               ],
             )
           ]),

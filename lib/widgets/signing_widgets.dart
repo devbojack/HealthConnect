@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthconnect/constants/assets_constants.dart';
+import 'package:healthconnect/widgets/text_icon_widgets.dart';
 
 //________________________________________________________________________________WIDGETS
 
@@ -10,15 +11,20 @@ class ProLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Column(
+      children: [
+        Container(
       height: mHeight * 20,
       width: mWidth * 60,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(Theme.of(context).brightness == Brightness.dark ? AssetConstants.lightAppLogo : AssetConstants.darkAppLogo),
+          image: AssetImage(AssetConstants.appLogo),
           fit: BoxFit.contain,
         ),
       ),
-    );
+    ),
+    const SizedBox(height: 8),
+    veryBigTextBold('HealthConnect', mHeight, context),
+    ],);
   }
 }

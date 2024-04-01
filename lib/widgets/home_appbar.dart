@@ -24,7 +24,7 @@ AppBar homeAppBar(BuildContext context) {
                 child: Image.asset(AssetConstants.appLogo),
               ),
               const SizedBox(width: 8),
-              Row(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
@@ -33,12 +33,13 @@ AppBar homeAppBar(BuildContext context) {
                   style: GoogleFonts.roboto(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).dividerColor.withOpacity(0.7))),
+                      color: Theme.of(context).dividerColor.withOpacity(0.7),),),
+                      const SizedBox(height: 2),
                       Text('Connect',
                   style: GoogleFonts.roboto(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).dividerColor.withOpacity(0.7))),
+                      color: Theme.of(context).dividerColor.withOpacity(0.7),),),
 
                 ]
               )

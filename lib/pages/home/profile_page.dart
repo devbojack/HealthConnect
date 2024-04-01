@@ -23,56 +23,66 @@ class _ProfilePageState extends State<ProfilePage> {
     double mHeight = SizeConfig.blockSizeH!;
 
     return MyBackground(
-        child: Scaffold(
-            appBar: AppBar(
-              elevation: 0,
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                color: Theme.of(context).dividerColor,
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text('HealthConnect',
-                      style: GoogleFonts.roboto(
-                          fontSize: 13,
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            body: ListView(
-                padding: const EdgeInsets.only(left: 16, right: 16, top: 12),
-                children: [
-                  profileHeader(),
-                  const SizedBox(height: 16),
-                  editProfile(),
-                  const SizedBox(height: 24),
-                  about(),
-                  const SizedBox(height: 32),
-                  questionAnswer(10, 3),
-                ])));
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            color: Theme.of(context).dividerColor,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text('HealthConnect',
+                  style: GoogleFonts.roboto(
+                      fontSize: 13,
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.bold)),
+            ],
+          ),
+        ),
+        body: ListView(
+          padding: const EdgeInsets.only(left: 16, right: 16, top: 12),
+          children: [
+            profileHeader(mHeight),
+            const SizedBox(height: 16),
+            editProfile(),
+            const SizedBox(height: 24),
+            about(),
+            const SizedBox(height: 32),
+            questionAnswer("10", "3"),
+          ],
+        ),
+      ),
+    );
   }
 
-  Widget profileHeader() {
+  Widget profileHeader(double mHeight) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          width: mHeight * 12,
+          height: mHeight * 12,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
+            image: DecorationImage(
+              image: AssetImage(
+                ('lib/identifications/profile_pic.JPG'),
+              ),
+              fit: BoxFit.contain,
+            ),
           ),
-          child: Image.asset('lib/identifications/profile_pic',
-              width: 200, height: 200, fit: BoxFit.contain),
         ),
         const SizedBox(width: 8),
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Bojack Jack',
@@ -129,81 +139,93 @@ class _ProfilePageState extends State<ProfilePage> {
         ]);
   }
 
-  Widget questionAnswer(double questionPoints, double answerPoints) {
+  Widget questionAnswer(String questionPoints, String answerPoints) {
     return Column(children: [
       Divider(
           color: Theme.of(context).dividerColor.withOpacity(0.4),
           thickness: 0.6),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: const Color(0xff21A700),
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.25),
-                  offset: const Offset(
-                    0,
-                    4.0,
+      Container(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: 32,
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xff21A700),
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.25),
+                    offset: const Offset(
+                      0,
+                      4.0,
+                    ),
+                    blurRadius: 4.0,
+                    spreadRadius: 0,
                   ),
-                  blurRadius: 4.0,
-                  spreadRadius: 0,
+                ],
+              ),
+              child: Text(
+                questionPoints,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.roboto(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
-              ],
-            ),
-            child: Text(
-              questionPoints.toString(),
-              style: GoogleFonts.roboto(
-                fontSize: 12,
-                fontWeight: FontWeight.normal,
-                color: Colors.white,
               ),
             ),
-          ),
-          const SizedBox(width: 12),
-          Text("Questions",
-              style: GoogleFonts.roboto(
-                  fontSize: 12, color: Theme.of(context).dividerColor)),
-        ],
+            const SizedBox(width: 12),
+            Text("Questions",
+                style: GoogleFonts.roboto(
+                    fontSize: 12, color: Theme.of(context).dividerColor)),
+          ],
+        ),
       ),
       Divider(
           color: Theme.of(context).dividerColor.withOpacity(0.4),
           thickness: 0.6),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: const Color(0xff21A700),
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.25),
-                  offset: const Offset(
-                    0,
-                    4.0,
+      Container(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: 32,
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xff21A700),
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.25),
+                    offset: const Offset(
+                      0,
+                      4.0,
+                    ),
+                    blurRadius: 4.0,
+                    spreadRadius: 0,
                   ),
-                  blurRadius: 4.0,
-                  spreadRadius: 0,
+                ],
+              ),
+              child: Text(
+                answerPoints,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.roboto(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
-              ],
-            ),
-            child: Text(
-              answerPoints.toString(),
-              style: GoogleFonts.roboto(
-                fontSize: 12,
-                fontWeight: FontWeight.normal,
-                color: Colors.white,
               ),
             ),
-          ),
-          const SizedBox(width: 12),
-          Text("Answers",
-              style: GoogleFonts.roboto(
-                  fontSize: 12, color: Theme.of(context).dividerColor)),
-        ],
+            const SizedBox(width: 12),
+            Text("Answers",
+                style: GoogleFonts.roboto(
+                    fontSize: 12, color: Theme.of(context).dividerColor)),
+          ],
+        ),
       ),
       Divider(
           color: Theme.of(context).dividerColor.withOpacity(0.4),
@@ -220,6 +242,8 @@ class _ProfilePageState extends State<ProfilePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
+              height: 32,
+              width: 32,
               decoration: BoxDecoration(
                 color: const Color(0xff21A700),
                 borderRadius: BorderRadius.circular(8),
@@ -239,7 +263,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 points.toString(),
                 style: GoogleFonts.roboto(
                   fontSize: 12,
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.w700,
                   color: Colors.white,
                 ),
               ),
@@ -269,34 +293,33 @@ class _ProfilePageState extends State<ProfilePage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Container(
-          //     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-          //     decoration: BoxDecoration(
-          //       color: Colors.yellow,
-          //       borderRadius: BorderRadius.circular(12),
-          //       boxShadow: [
-          //         BoxShadow(
-          //           color: Theme.of(context).dividerColor.withOpacity(0.25),
-          //           offset: const Offset(
-          //             0,
-          //             4.0,
-          //           ),
-          //           blurRadius: 4.0,
-          //           spreadRadius: 0,
-          //         )
-          //       ],
-          //     ),
-          //     child:
-          Text(
-            '875',
-            style: GoogleFonts.roboto(
-                fontSize: 13,
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold),
-          ),
-          // ),
           Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            decoration: BoxDecoration(
+              color: Colors.yellow,
+              borderRadius: BorderRadius.circular(6),
+              boxShadow: [
+                BoxShadow(
+                  color: Theme.of(context).dividerColor.withOpacity(0.25),
+                  offset: const Offset(
+                    0,
+                    4.0,
+                  ),
+                  blurRadius: 4.0,
+                  spreadRadius: 0,
+                )
+              ],
+            ),
+            child: Text(
+              '875',
+              style: GoogleFonts.roboto(
+                  fontSize: 13,
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: Theme.of(context).scaffoldBackgroundColor,

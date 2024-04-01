@@ -96,7 +96,7 @@ class MyThemes {
   static final darkTheme = ThemeData(
     primaryColor: ColorConstants.appBlue,
     // scaffoldBackgroundColor: ColorConstants.darkBackground,
-    scaffoldBackgroundColor: Color(0xff0F141A),
+    scaffoldBackgroundColor: const Color(0xff0F141A),
     textTheme: TextTheme(
       titleLarge: GoogleFonts.roboto(
         fontSize: 20,

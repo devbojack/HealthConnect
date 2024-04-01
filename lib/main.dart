@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:healthconnect/identifications/secret_ids.dart';
 import 'package:healthconnect/pages/app_wrapper/app_checker.dart';
+import 'package:healthconnect/pages/home/home.dart';
 import 'package:healthconnect/pages/home/profile_page.dart';
 import 'package:healthconnect/pages/signing/google_signin_provider.dart';
 import 'package:healthconnect/provider/theme_provider.dart';
@@ -87,7 +88,7 @@ class _MyAppState extends State<MyApp> {
           themeMode: provider.themeMode,
           darkTheme: MyThemes.darkTheme,
           theme: MyThemes.lightTheme,
-          home: const ProfilePage(),
+          home: const Home(),
         ),
       );
     });

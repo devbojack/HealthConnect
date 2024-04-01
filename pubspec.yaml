@@ -81,12 +81,12 @@ flutter_launcher_icons:
 flutter_native_splash:
   color: "#f5f5f5"
   image: "lib/assets/image_assets/splash_image_light.png"
-  color_dark: "#111522"
+  color_dark: "#0F141A"
   image_dark: "lib/assets/image_assets/splash_image_dark.png"
   android_12:
     color: "#f5f5f5"
     image: "lib/assets/image_assets/splash_image_light.png"
-    color_dark: "#111522"
+    color_dark: "#0F141A"
     image_dark: "lib/assets/image_assets/splash_image_dark.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

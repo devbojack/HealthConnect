@@ -1,4 +1,4 @@
-import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:healthconnect/constants/image_constants.dart';
 import 'package:lottie/lottie.dart';

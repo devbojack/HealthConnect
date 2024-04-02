@@ -20,6 +20,7 @@ class SigningPage extends StatefulWidget {
 class _SigningPageState extends State<SigningPage> {
   late bool isSigningIn;
   final GlobalKey<FormState> signingKey = GlobalKey<FormState>();
+  
   @override
   void initState() {
     isSigningIn = widget.isSigningIn;

@@ -4,7 +4,6 @@ import '../../provider/size_config.dart';
 import '../../widgets/build_button.dart';
 import '../../widgets/loading_sb.dart';
 import '../../widgets/my_background.dart';
-import '../../widgets/text_icon_widgets.dart';
 
 class NoInternetConnectionPage extends StatefulWidget {
   const NoInternetConnectionPage({required this.onRefreshScreen, super.key});

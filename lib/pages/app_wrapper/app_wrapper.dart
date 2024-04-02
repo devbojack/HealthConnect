@@ -4,7 +4,6 @@ import 'package:healthconnect/pages/home/home_loading_page.dart';
 import 'package:healthconnect/pages/home/home_page.dart';
 import 'package:healthconnect/pages/signing/introduction_page.dart';
 import 'package:healthconnect/widgets/my_background.dart';
-import 'package:healthconnect/widgets/text_icon_widgets.dart';
 
 class AppWrapper extends StatefulWidget {
   const AppWrapper({super.key});

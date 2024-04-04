@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:healthconnect/provider/size_config.dart';
@@ -7,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../constants/image_constants.dart';
 import '../constants/new_color_constants.dart';
 import '../pages/signing/google_signin_provider.dart';
+import '../services/create_user_data.dart';
 
 class BuildButton extends StatelessWidget {
   const BuildButton(
@@ -25,25 +28,26 @@ class BuildButton extends StatelessWidget {
     double mWidth = SizeConfig.blockSizeW!;
     return DecoratedBox(
       decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [appGradientOne, appGradientTwo]),
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-                color: Theme.of(context).shadowColor.withOpacity(0.12),
-                offset: const Offset(-0, 4),
-                blurRadius: 6.0,
-                spreadRadius: 0),
-          ],
+        gradient:
+            const LinearGradient(colors: [appGradientOne, appGradientTwo]),
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+              color: Theme.of(context).shadowColor.withOpacity(0.12),
+              offset: const Offset(-0, 4),
+              blurRadius: 6.0,
+              spreadRadius: 0),
+        ],
       ),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          foregroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          minimumSize: const Size(300, 44),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))
-        ),
+            backgroundColor: Colors.transparent,
+            foregroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            minimumSize: const Size(300, 44),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
         child: buttonText(buttonTitle, context),
       ),
     );
@@ -73,7 +77,8 @@ class NonBlueButton extends StatelessWidget {
           padding: MaterialStateProperty.all(
               const EdgeInsets.symmetric(horizontal: 32)),
           backgroundColor: MaterialStateProperty.all<Color>(buttonColor),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+          shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
           minimumSize: MaterialStateProperty.all(const Size(300, 42)),
           overlayColor: MaterialStateProperty.resolveWith<Color?>(
             (Set<MaterialState> states) {
@@ -95,10 +100,10 @@ class NonBlueButton extends StatelessWidget {
 class BuildSmallRoundButton extends StatelessWidget {
   const BuildSmallRoundButton(
       {required this.onPressed,
-        required this.buttonColor,
-        required this.buttonTitle,
-        required this.titleColor,
-        super.key});
+      required this.buttonColor,
+      required this.buttonTitle,
+      required this.titleColor,
+      super.key});
 
   final VoidCallback onPressed;
   final Color buttonColor;
@@ -113,8 +118,8 @@ class BuildSmallRoundButton extends StatelessWidget {
           backgroundColor: buttonColor,
           elevation: 5,
           minimumSize: const Size(150, 42),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24))
-      ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(24))),
       child: buttonColoredText(buttonTitle, titleColor),
     );
   }
@@ -136,15 +141,16 @@ class BuildSmallButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: onPressed,
+      onPressed: onPressed,
       style: ButtonStyle(
         padding: MaterialStateProperty.all(
             const EdgeInsets.symmetric(horizontal: 32)),
         backgroundColor: MaterialStateProperty.all<Color>(buttonColor),
         minimumSize: MaterialStateProperty.all(const Size(100, 32)),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
+        shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
         overlayColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
+          (Set<MaterialState> states) {
             if (states.contains(MaterialState.hovered)) {
               return buttonColor;
             }
@@ -156,7 +162,7 @@ class BuildSmallButton extends StatelessWidget {
           },
         ),
       ),
-        child: buttonColoredText(buttonTitle, titleColor),
+      child: buttonColoredText(buttonTitle, titleColor),
     );
   }
 }
@@ -177,11 +183,19 @@ class BuildButtonWithIcon extends StatelessWidget {
     SizeConfig().init(context);
     double mWidth = SizeConfig.blockSizeW!;
     return ElevatedButton(
-      onPressed: () {
+      onPressed: () async {
         final provider =
             Provider.of<GoogleSignInProvider>(context, listen: false);
         try {
           provider.googleLogin();
+          User? user = FirebaseAuth.instance.currentUser;
+          DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+              .collection("user")
+              .doc(user?.uid.toString())
+              .get();
+          if (documentSnapshot.exists) {
+            createUserData(user);
+          }
         } catch (e) {
           showSimpleNotification(
             Text(
@@ -201,7 +215,8 @@ class BuildButtonWithIcon extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all<Color>(fullWhite),
         side: MaterialStateProperty.all(const BorderSide(color: appBlue)),
         minimumSize: MaterialStateProperty.all(const Size(300, 48)),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+        shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
         overlayColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.hovered)) {

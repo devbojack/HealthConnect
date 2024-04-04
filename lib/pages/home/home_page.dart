@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthconnect/pages/home/home.dart';
 import 'package:healthconnect/pages/home/home_loading_page.dart';
 import 'package:healthconnect/pages/home/notifications_page.dart';
 import 'package:healthconnect/pages/home/search_page.dart';
@@ -10,6 +11,7 @@ import 'package:healthconnect/widgets/my_background.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../constants/new_color_constants.dart';
 import '../../provider/size_config.dart';
+import '../../services/create_user_data.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({required this.isEmailVerified, super.key});
@@ -87,11 +89,11 @@ class _HomePageState extends State<HomePage> {
     if (!isEmailVerified) {
       FirebaseAuth.instance.currentUser?.sendEmailVerification();
       timer = Timer.periodic(
-          const Duration(seconds: 3), (_) => checkEmailVerified());
+          const Duration(seconds: 3), (_) => checkEmailVerified(context));
     }
   }
 
-  checkEmailVerified() async {
+  checkEmailVerified(BuildContext context) async {
     await FirebaseAuth.instance.currentUser?.reload();
     setState(() {
       isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
@@ -105,6 +107,7 @@ class _HomePageState extends State<HomePage> {
               style:
                   TextStyle(color: Theme.of(context).scaffoldBackgroundColor),
             )));
+        createUserData(FirebaseAuth.instance.currentUser);
       }
       timer?.cancel();
     }
@@ -131,7 +134,7 @@ class _HomePageState extends State<HomePage> {
               context,
               controller: _controller,
               screens: [
-                HomeLoadingPage(),
+                Home(),
                 SearchPage(),
                 NotificationsPage(),
                 SettingsPage(

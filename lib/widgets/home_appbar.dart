@@ -8,6 +8,8 @@ AppBar homeAppBar(BuildContext context) {
   return AppBar(
     automaticallyImplyLeading: false,
     elevation: 0,
+    bottomOpacity: 0,
+    scrolledUnderElevation: 0,
     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     centerTitle: true,
     title: Row(

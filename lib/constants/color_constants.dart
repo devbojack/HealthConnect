@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ColorConstants {
   //__________________OVERALL
   static const Color appBlue = Color(0xff1877f2);
+  static const Color cardBoxColor =  Color.fromARGB(255, 38, 79, 155);
 
   //__________________LIGHT THEME
   static const Color lightBackground = Color(0xfff5f5f5);

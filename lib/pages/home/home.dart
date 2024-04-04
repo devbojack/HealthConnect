@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:healthconnect/model/home_question_data.dart';
+import 'package:healthconnect/pages/home/ask_a_question_page.dart';
+import 'package:healthconnect/pages/home/home_loading_page.dart';
+import 'package:healthconnect/pages/home/question_page.dart';
 import 'package:healthconnect/provider/size_config.dart';
 import 'package:healthconnect/widgets/home_appbar.dart';
 import 'package:healthconnect/widgets/my_background.dart';
@@ -15,9 +20,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    double mHeight = SizeConfig.blockSizeH!;
-    double mWidth = SizeConfig.blockSizeW!;
-
     return MyBackground(
       child: Scaffold(
         appBar: homeAppBar(context),
@@ -26,26 +28,26 @@ class _HomeState extends State<Home> {
           children: [
             askAQuestion(context),
             Expanded(
-              child: ListView.builder(
-                itemCount: 4, // Number of questions you want to display
-                itemBuilder: (context, index) {
-                  return Column(children: [
-                    Divider(
-                        color: Theme.of(context).dividerColor.withOpacity(0.2)),
-                    questions(
-                      context,
-                      "10 votes",
-                      "2 answers",
-                      "Is running on the treadmill while pregnant good for you?",
-                      "Ben White",
-                      "16 mins ago",
-                    ),
-                    index == 3
-                        ? Divider(
-                            color:
-                                Theme.of(context).dividerColor.withOpacity(0.2))
-                        : const SizedBox()
-                  ]);
+              child: StreamBuilder<List<HomeQuestionData>>(
+                stream: readQuestions(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        'Something went wrong!',
+                        style: GoogleFonts.roboto(
+                            color: Theme.of(context).dividerColor,
+                            fontSize: 14),
+                      ),
+                    );
+                  } else if (snapshot.hasData) {
+                    final questions = snapshot.data!;
+                    return ListView(
+                      children: questions.map(buildQuestion).toList(),
+                    );
+                  } else {
+                    return const HomeLoadingPage();
+                  }
                 },
               ),
             ),
@@ -55,29 +57,70 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget questions(
-    BuildContext context,
-    String votes,
-    String answers,
-    String question,
-    String user,
-    String time,
-  ) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 12),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            padding: const EdgeInsets.only(right: 12),
-            child: Column(
+  Stream<List<HomeQuestionData>> readQuestions() => FirebaseFirestore.instance
+      .collection("questions")
+      .snapshots()
+      .map((snapshot) => snapshot.docs
+          .map((doc) => HomeQuestionData.fromJson(doc.data()))
+          .toList());
+
+
+
+
+  Duration differenceBetweenNowAndTimestamp(Timestamp timestamp) {
+    DateTime now = DateTime.now();
+    DateTime dateTimeFromTimestamp =
+        timestamp.toDate(); // Convert Firebase Timestamp to DateTime
+
+    return now.difference(dateTimeFromTimestamp);
+  }
+
+
+  Widget buildQuestion(HomeQuestionData homeQuestionData) {
+    Timestamp createdAt = Timestamp.fromDate(homeQuestionData.created_at);
+    String duration = '';
+    // User? user = (await FirebaseAuth.instance.userChanges().firstWhere((user) => user!.uid == userId));
+
+    var votes =
+        (homeQuestionData.upvotes.length - homeQuestionData.downvotes.length);
+    if (differenceBetweenNowAndTimestamp(createdAt).inHours > 24) {
+      duration =
+          '${differenceBetweenNowAndTimestamp(createdAt).inDays} days ago';
+    } else if (differenceBetweenNowAndTimestamp(createdAt).inHours > 0) {
+      duration =
+          '${differenceBetweenNowAndTimestamp(createdAt).inHours} hours ago';
+    } else {
+      duration =
+          '${differenceBetweenNowAndTimestamp(createdAt).inMinutes % 60} mins ago';
+    }
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) =>
+                QuestionPage(questionId: homeQuestionData.questionId)));
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: Theme.of(context).dividerColor.withOpacity(0.5),
+              width: 0.5,
+            ),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  votes,
+                  votes == 1 ? "$votes vote" : "$votes votes",
                   textAlign: TextAlign.right,
                   style: GoogleFonts.roboto(
                     color: Theme.of(context).dividerColor.withOpacity(0.8),
@@ -99,7 +142,9 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   child: Text(
-                    answers,
+                    homeQuestionData.answers.length == 1
+                        ? "${homeQuestionData.answers.length.toString()} answer"
+                        : "${homeQuestionData.answers.length.toString()} answers",
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                     maxLines: 1,
@@ -112,52 +157,54 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-          ),
-          Flexible(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                question,
-                style: GoogleFonts.roboto(
-                  color: Theme.of(context).dividerColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
+            const SizedBox(width: 12),
+            Flexible(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  homeQuestionData.body,
+                  style: GoogleFonts.roboto(
+                    color: Theme.of(context).dividerColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 6),
-              SizedBox(
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      user,
-                      textAlign: TextAlign.right,
-                      style: GoogleFonts.roboto(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600,
+                const SizedBox(height: 6),
+                SizedBox(
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        homeQuestionData.owner,
+                        textAlign: TextAlign.right,
+                        style: GoogleFonts.roboto(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      time,
-                      textAlign: TextAlign.right,
-                      style: GoogleFonts.roboto(
-                        color: Theme.of(context).dividerColor.withOpacity(0.8),
-                        fontSize: 10,
-                        fontWeight: FontWeight.normal,
+                      const SizedBox(width: 6),
+                      Text(
+                        duration,
+                        textAlign: TextAlign.right,
+                        style: GoogleFonts.roboto(
+                          color:
+                              Theme.of(context).dividerColor.withOpacity(0.8),
+                          fontSize: 10,
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          )),
-        ],
+              ],
+            )),
+          ],
+        ),
       ),
     );
   }
@@ -177,21 +224,29 @@ class _HomeState extends State<Home> {
               color: Theme.of(context).dividerColor,
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: 8,
-            ),
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              'Ask a Question?',
-              style: GoogleFonts.roboto(
-                fontSize: 12,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AskAQuestion()),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 8,
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                'Ask a Question?',
+                style: GoogleFonts.roboto(
+                  fontSize: 12,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
